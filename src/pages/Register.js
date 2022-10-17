@@ -15,9 +15,7 @@ const Register = () => {
     e.preventDefault();
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
-    console.log(email);
-    console.log(password);
-    console.log(name);
+    
   };
 
   useEffect(() => {

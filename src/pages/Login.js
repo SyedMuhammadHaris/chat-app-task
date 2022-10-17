@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { auth, logInWithEmailAndPassword} from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate , Link} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,8 +12,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
      logInWithEmailAndPassword(email,password);
-    console.log(email);
-    console.log(password);
+
   };
 
   useEffect(() => {
@@ -21,8 +20,9 @@ const Login = () => {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate("/dashboard");
-  }, [user, loading]);
+    if (user) 
+      navigate("/dashboard");
+  },[user,loading]);
 
 
   return (
