@@ -1,13 +1,10 @@
-import { Link } from 'react-router-dom';
-import {logout } from "../firebase";
-import useUserHook from "../hooks/useUserHook";
-
+import { Link } from "react-router-dom";
+import LogOut from "../pages/LogOut";
+import { auth } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Navbar = () => {
-
-  const {user , name} = useUserHook();
-
-
+  const [user] = useAuthState(auth);
   return (
     <header>
       <div className="Navbar">
@@ -17,21 +14,19 @@ const Navbar = () => {
         <nav>
           {user && (
             <div>
-              <span style={{"paddingRight": 20}}>{name}</span>
-              <span>{user.email}</span>
-              <button onClick={logout}>Log out</button>
+              <span style={{ paddingRight: 20 }}>{user.email}</span>
+              <LogOut />
             </div>
           )}
           {!user && (
             <div>
-              <Link to="/">Login</Link>
-              <Link to="/signup">Signup</Link>
+              <p>Not Login</p>
             </div>
           )}
         </nav>
       </div>
     </header>
-  )
-}
+  );
+};
 
 export default Navbar;

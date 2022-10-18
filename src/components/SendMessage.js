@@ -1,45 +1,38 @@
 import React, { useState } from "react";
-import { db, auth } from "../firebase";
-// import firebase from 'firebase'
-import firebase from "firebase/compat/app";
-import {collection,addDoc} from "firebase/firestore";
-
-
-import "firebase/compat/firestore";
+import { auth, db } from "../firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const SendMessage = () => {
-  const [msg, setMsg] = useState("");
+  const [input, setInput] = useState("");
 
-  async function sendMessage(e) {
+  const sendMessage = async (e) => {
     e.preventDefault();
-    const { uid, email } = auth.currentUser;
-    try {
-      await addDoc(collection(db, "messages"), {
-        text: msg,
-        email,
-        uid,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      });
-      setMsg("");
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
+    if (input === "") {
+      alert("Please enter a valid message");
+      return;
     }
-  }
+    const { uid, displayName } = auth.currentUser;
+    await addDoc(collection(db, "messages"), {
+      text: input,
+      name: displayName,
+      uid,
+      timestamp: serverTimestamp(),
+    });
+    setInput("");
+  };
+
   return (
-    <div>
-      <form onSubmit={sendMessage}>
-        <div className="sendMsg">
-          <input
-            placeholder="Message..."
-            type="text"
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
-          />
-          <button type="submit">Send</button>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={sendMessage}>
+      <div className="sendMsg">
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          type="text"
+          placeholder="Message"
+        />
+        <button type="submit">Send</button>
+      </div>
+    </form>
   );
 };
 

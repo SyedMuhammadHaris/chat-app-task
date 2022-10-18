@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
-import {db} from "../firebase";
+import React, { useState, useEffect } from "react";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
-import { query, collection, orderBy, onSnapshot } from 'firebase/firestore';
-
+import { db } from "../firebase";
+import { query, collection, orderBy, onSnapshot } from "firebase/firestore";
 
 const ChatComp = () => {
-  const [messages , setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
 
-  
   useEffect(() => {
-    const q = query(collection(db, 'messages'), orderBy('timestamp'));
+    const q = query(collection(db, "messages"), orderBy("timestamp"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let messages = [];
       querySnapshot.forEach((doc) => {
@@ -22,16 +20,16 @@ const ChatComp = () => {
   }, []);
 
   return (
-    <>
-    <div className="msgs">
-      <h2>Chat</h2>
-    {messages && messages.map((message) => (
+    <div className="chatDiv">
+      <main>
+        {messages &&
+          messages.map((message) => (
             <Message key={message.id} message={message} />
           ))}
-</div>
-<SendMessage />
-</>
-  )
-}
+      </main>
+      <SendMessage />
+    </div>
+  );
+};
 
 export default ChatComp;
