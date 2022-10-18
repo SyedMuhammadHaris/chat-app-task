@@ -4,13 +4,13 @@ import {getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOu
 
 import {getFirestore, collection,addDoc} from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: "AIzaSyAaMg3zAy5U-CQRCIBLbsASvRgITE3BGjU",
-  authDomain: "chat-app-e16f0.firebaseapp.com",
-  projectId: "chat-app-e16f0",
-  storageBucket: "chat-app-e16f0.appspot.com",
-  messagingSenderId: "50255436199",
-  appId: "1:50255436199:web:ca7409c646acdd7dbcfe82",
-  measurementId: "G-V3KLSNJFVB"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
 };
 
 // Initialize Firebase
