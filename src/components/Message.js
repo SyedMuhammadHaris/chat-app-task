@@ -8,8 +8,8 @@ const Message = ({ message }) => {
         message.uid === auth.currentUser.uid ? "sent" : "received"
       }`}
     >
-      <p>{message.name}</p>
-      <p>{message.text}</p>
+      <p className="message-content">{message.email} </p>
+      <p className="message-content">{message.text}</p>
     </div>
   );
 };

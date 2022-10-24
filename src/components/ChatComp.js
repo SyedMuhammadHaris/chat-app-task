@@ -21,12 +21,12 @@ const ChatComp = () => {
 
   return (
     <div className="chatDiv">
-      <main>
+      <div className="messageContainer">
         {messages &&
           messages.map((message) => (
             <Message key={message.id} message={message} />
           ))}
-      </main>
+      </div>
       <SendMessage />
     </div>
   );

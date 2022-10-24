@@ -11,9 +11,10 @@ const SendMessage = () => {
       alert("Please enter a valid message");
       return;
     }
-    const { uid, displayName } = auth.currentUser;
+    const { uid, displayName,email } = auth.currentUser;
     await addDoc(collection(db, "messages"), {
       text: input,
+      email:email,
       name: displayName,
       uid,
       timestamp: serverTimestamp(),
